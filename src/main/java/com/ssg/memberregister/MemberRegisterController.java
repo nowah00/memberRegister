@@ -27,12 +27,23 @@ public class MemberRegisterController extends HttpServlet {
         member.setUser_pwd(request.getParameter("user_pwd"));
         member.setGender(request.getParameter("gender"));
         // String.join 기억하기!
-        member.setHobby(String.join(",", request.getParameterValues("hobby")));
+        if (request.getParameterValues("hobby") != null) {
+            member.setHobby(String.join(",", request.getParameterValues("hobby")));
+        } else {
+            String hobby = "";
+            member.setHobby(hobby);
+        }
+
 
         System.out.println("ID : " + member.getUser_id());
         System.out.println("PWD : " + member.getUser_pwd());
         System.out.println("Gender : " + member.getGender());
-        System.out.println("Hobby : " + String.join(",", request.getParameterValues("hobby")));
+        if (request.getParameterValues("hobby") != null) {
+            System.out.println("Hobby : " + String.join(",", request.getParameterValues("hobby")));
+        } else {
+            String hobby = "";
+            System.out.println("Hobby : " + hobby);
+        }
 
         try {
             int pass = memberDAO.addMember(member);
