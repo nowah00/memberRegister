@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/homework/memberRegister")
+@WebServlet("/memberRegister")
 public class MemberRegisterController extends HttpServlet {
 
     @Override
@@ -32,7 +32,7 @@ public class MemberRegisterController extends HttpServlet {
         System.out.println("ID : " + member.getUser_id());
         System.out.println("PWD : " + member.getUser_pwd());
         System.out.println("Gender : " + member.getGender());
-        System.out.println("Hobby : " + String.join(", ", request.getParameterValues("hobby")));
+        System.out.println("Hobby : " + String.join(",", request.getParameterValues("hobby")));
 
         try {
             int pass = memberDAO.addMember(member);
@@ -41,7 +41,7 @@ public class MemberRegisterController extends HttpServlet {
             } else {
                 request.setAttribute("success", "회원가입 실패..");
             }
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/homework/result.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/result.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
